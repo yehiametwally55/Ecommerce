@@ -1,0 +1,56 @@
+<div class="container py-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <h1>Your Cart</h1>
+        <button  (click)="removeCartProducts();" class="btn btn-outline-danger">Clear Cart</button>
+    </div>
+<div *ngIf="isLoading" class="text-center my-5">
+  <p>Loading your cart...</p>
+  </div>
+
+<div *ngIf="!isLoading && cartProducts.length === 0" class="text-center my-5">
+  <h2>Your Cart is Empty</h2>
+  <p>Looks like you haven't added anything to your cart yet.</p>
+  <button routerLink="/products" class="btn bg-main text-white">Continue Shopping</button> </div>
+
+<div *ngIf="!isLoading && cartProducts.length > 0">
+  <h2 class="my-4">Your Shopping Cart</h2>
+  <div
+    *ngFor="let item of cartProducts" class="row py-3 my-3 border-bottom align-items-center"
+  >
+    <div class="col-md-1 col-2">
+      <div style="width: 60px; height: 60px; background-color: #eee; text-align: center; line-height: 60px;">Img</div>
+    </div>
+
+    <div class="col-md-7 col-10">
+      <h5 class="mb-1">Product: {{ item.name }}</h5>
+      <p class="mb-1 text-muted">Unit Price: {{ item.price | currency:'EGP' }}</p>
+      <button (click)="removeProductFromCart(item.product)" class="btn btn-sm text-danger ps-0"> <i class="fa-solid fa-trash"></i> Remove
+      </button>
+    </div>
+
+    <div class="col-md-4 col-12 mt-2 mt-md-0">
+      <div class="d-flex align-items-center justify-content-md-end">
+         <button (click)="updateProductQuantity(item.product, item.quantity - 1)"
+                class="btn btn-sm btn-outline-danger">-</button>
+        <span class="mx-3 h5 mb-0">{{ item.quantity }}</span> <button (click)="updateProductQuantity(item.product, item.quantity + 1)"
+                class="btn btn-sm btn-outline-success">+</button>
+      </div>
+      <p class="text-md-end mt-2 mb-0 fw-bold">Subtotal: {{ (item.price * item.quantity) | currency:'EGP' }}</p>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row mt-4">
+    <div class="col-12 text-end">
+      <h3>Total: {{ totalCartPrice | currency:'EGP' }}</h3>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 text-end">
+      <button *ngIf="cartId && cartProducts.length > 0" [routerLink]="['/checkout', cartId]" class="btn bg-main text-white px-4 py-2">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+</div>

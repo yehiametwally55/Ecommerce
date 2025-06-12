@@ -1,0 +1,16 @@
+<div class="container py-5" >
+    <form [formGroup]="LoginForm" (ngSubmit)="login()">
+        <label for="" class="my-2">Email</label>
+        <input type="email" placeholder="Email..." class="form-control mb-3"  formControlName = "email">
+        <div  class="alert alert-danger" *ngIf="LoginForm.get('email')?.touched && LoginForm.get('email')?.status == 'INVALID'">
+            <p *ngIf="LoginForm.get('email')?.getError('required')">Email is required </p>
+            <p *ngIf="LoginForm.get('email')?.getError('email')">Enter Valid Email</p>
+        </div>
+        <label for="" class="my-2">Password</label>
+        <input type="password" placeholder="Password..." class="form-control mb-3"  formControlName = "password">
+        <div  class="alert alert-danger" *ngIf="LoginForm.get('password')?.touched && LoginForm.get('password')?.status == 'INVALID'">
+            <p *ngIf="LoginForm.get('password')?.getError('required')" >Password is required</p>
+        </div>
+        <button type="submit"  class="btn bg-main text-white d-block me-auto">Login</button>
+    </form>
+</div>

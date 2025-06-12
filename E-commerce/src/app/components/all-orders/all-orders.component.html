@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="d-flex align-items-center justify-content-center">
+            <h2 class="text-main">My Orders</h2>
+        </div>
+
+    <div *ngFor="let items of cartItems" class="row py-4 my-3 shadow-sm rounded-3">
+    <div class="col-md-12">
+      <div class="d-flex align-items-center justify-content-between">
+        <!-- {{ items.cartItems.length }}  -->
+        <div>
+          <h4 class="text-danger">Items</h4>
+          <h5>Order ID: {{items._id}}</h5>
+          <p>Total: {{ items.price | currency:'EGP' }}</p>
+          <p>Date of Order : {{items.paidAt}}</p>
+          <p>Payment Method: {{items.paymentMethod}}</p>
+          <p class="text-main">Order Status: {{items.isDelivered ? "Delivered" : "Not delievered yet"}}</p>
+        </div>
+      </div>
+      <div class="d-flex align-items-center">
+       
+      </div>
+    </div>
+  </div>
+    </div>
+</div>

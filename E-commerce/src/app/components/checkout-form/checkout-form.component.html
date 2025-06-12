@@ -1,0 +1,15 @@
+<div class="container">
+    <form (ngSubmit)="checkout(addressForm)" [formGroup]="addressForm" class="w-75 m-auto p-5">
+        <label for="details">Details</label>
+        <input type="text" id="details" class="form-control" formControlName="details">
+
+        <label for="phone">Phone</label>
+        <input type="text" id="Phone" class="form-control" formControlName="Phone">
+
+        <label for="city">City</label>
+        <input type="text" id="city" class="form-control" formControlName="city">
+        
+
+        <button (click)="checkout(addressForm)" type="submit" class="btn bg-main px-3 text-white mt-2">Checkout</button>
+    </form>
+</div>

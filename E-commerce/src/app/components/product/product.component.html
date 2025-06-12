@@ -1,0 +1,10 @@
+<div *ngIf="product" class="product p-3 overflow-hidden cursor-pointer"> <div [routerLink]="['../product', product.id]">
+        <img *ngIf="product.mainImage" [src]="product.mainImage" class="w-100" alt="{{ product.name }}">
+        <h6 class="text-main" *ngIf="product.category && product.category.name">{{ product.category.name }}</h6>
+        <h4 *ngIf="product.name">{{ product.name.split(" ").slice(0,2).join(" ") }}</h4>
+        <div class="d-flex justify-content-between align-items-center">
+            <p>{{ (product.finalPrice !== undefined ? product.finalPrice : product.price) | currency:'EGP' }}</p> <p><span><i class="fa-regular fa-star rating-color"></i></span> {{ product.rating || 0 }} </p>
+        </div>
+    </div>
+    <button (click)="addProductToCart(product.id)" class="btn bg-main text-white m-auto d-block">Add to Cart</button>
+</div>

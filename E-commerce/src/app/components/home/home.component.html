@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-9 p-0">
+        <owl-carousel-o [options] = "customOptions">
+            <ng-template carouselSlide>
+                <img style="height: 500px;"  src="assets/images/slider-image-1.jpeg" class="w-100" >
+            </ng-template>
+            <ng-template carouselSlide>
+                <img style="height: 500px;"  src="assets/images/slider-image-2.jpeg" class="w-100" >
+            </ng-template>
+          </owl-carousel-o>
+    </div>
+    <div class="col-md-3 p-0">
+        <div>
+            <img style="height: 250px;" class="w-100" src="assets/images/photo-1.jpeg"  alt="">
+        </div>
+        <div>
+            <img style="height: 250px;" class="w-100" src="assets/images/photo-2.jpg" alt="">
+        </div>
+    </div>
+    <div class="col-md-12" id="search">
+        <input [(ngModel)]="searchTerm" (ngModelChange)="onSearchTermChange()" type="text" class="form-control w-75 m-auto my-4" placeholder="Search...">
+    </div>
+    <ng-container *ngIf="(products | search:searchTerm) as filteredProducts">
+            <div *ngIf="filteredProducts.length > 0" class="row" id="productListStart"> <div *ngFor="let product of filteredProducts.slice(0, displayCount)" class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                    <app-product [product]="product"></app-product>
+                </div>
+            </div>
+
+            <div *ngIf="filteredProducts.length === 0 && products.length > 0 && searchTerm" class="col-12 text-center my-5">
+                <p>No products found matching your search term "{{ searchTerm }}".</p>
+            </div>
+            <div *ngIf="products.length === 0 && !searchTerm" class="col-12 text-center my-5">
+                <p>No products available at the moment.</p>
+            </div>
+
+            <div class="col-12 text-center my-4">
+                <button *ngIf="displayCount < filteredProducts.length"
+                        (click)="showTheRest(filteredProducts.length)"
+                        class="btn bg-main text-white mx-1 px-4 py-2">
+                    <i class="fas fa-chevron-down me-2"></i> 
+                    Display More ({{ filteredProducts.length - displayCount }} remaining)
+                </button>
+
+                <button *ngIf="displayCount === filteredProducts.length && filteredProducts.length > initialDisplayCount"
+                        (click)="showLess()"
+                        class="btn btn-secondary mx-1 px-4 py-2"> 
+                    <i class="fas fa-chevron-up me-2"></i> 
+                    Show Less
+                </button>
+            </div>
+        </ng-container>
+ </div>
+
